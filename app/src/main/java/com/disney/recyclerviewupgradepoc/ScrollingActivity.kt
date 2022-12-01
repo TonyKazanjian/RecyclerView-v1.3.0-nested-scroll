@@ -1,12 +1,14 @@
 package com.disney.recyclerviewupgradepoc
 
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.disney.recyclerviewupgradepoc.databinding.ActivityScrollingBinding
 
 class ScrollingActivity : AppCompatActivity() {
@@ -21,9 +23,23 @@ class ScrollingActivity : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+        binding.composeRoot.setContent {
+
+            MaterialTheme {
+                RootScrollable()
+            }
+        }
+    }
+
+    @Composable
+    fun RootScrollable(){
+        LazyColumn {
+            items(
+                count = 100
+            ) {
+                Text("Hello World", color = Color.White)
+            }
         }
     }
 
