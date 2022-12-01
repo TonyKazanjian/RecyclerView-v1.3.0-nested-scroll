@@ -4,43 +4,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import com.disney.recyclerviewupgradepoc.databinding.ActivityScrollingBinding
+import com.disney.recyclerviewupgradepoc.databinding.ActivityMainBinding
 
-class ScrollingActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityScrollingBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityScrollingBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(findViewById(R.id.toolbar))
         binding.toolbarLayout.title = title
 
-        binding.composeRoot.setContent {
-
-            MaterialTheme {
-                RootScrollable()
-            }
-        }
-    }
-
-    @Composable
-    fun RootScrollable(){
-        LazyColumn {
-            items(
-                count = 100
-            ) {
-                Text("Hello World", color = Color.White)
-            }
-        }
+        supportFragmentManager.beginTransaction()
+            .add(binding.fragmentContainer.id, ScrollingContentFragment())
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
