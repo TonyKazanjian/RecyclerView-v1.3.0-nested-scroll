@@ -2,6 +2,7 @@ package com.disney.recyclerviewupgradepoc
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.ScrollView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Extension of [CoordinatorLayout] which allows the layout to behave correctly as a nested scrolling
  * child.
  */
-class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild3 {
+class NestedScrollingCoordinatorLayoutChild : CoordinatorLayout, NestedScrollingChild3 {
     private val helper = NestedScrollingChildHelper(this)
 
     constructor(context: Context) : super(context)
@@ -40,11 +41,13 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
 
     override fun onStartNestedScroll(child: View, target: View, axes: Int, type: Int): Boolean {
         val superResult = super.onStartNestedScroll(child, target, axes, type)
+        Log.d("TONY", "Should nested scroll start? :${startNestedScroll(axes, type) || superResult}")
         return startNestedScroll(axes, type) || superResult
     }
 
     override fun onStartNestedScroll(child: View, target: View, axes: Int): Boolean {
         val superResult = super.onStartNestedScroll(child, target, axes)
+        Log.d("TONY", "Should nested scroll start? :${startNestedScroll(axes) || superResult}")
         return startNestedScroll(axes) || superResult
     }
 
@@ -52,6 +55,7 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
         dispatchNestedPreScroll(dx, dy, consumed, null, type)
         val remainingX = dx - consumed[0]
         val remainingY = dy - consumed[1]
+//        Log.d("TONY", "onNestedPreScroll remainingY = $remainingY")
         if (remainingX != 0 || remainingY != 0) {
             super.onNestedPreScroll(target, remainingX, remainingY, consumed, type)
         }
@@ -61,6 +65,7 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
         dispatchNestedPreScroll(dx, dy, consumed, null)
         val remainingX = dx - consumed[0]
         val remainingY = dy - consumed[1]
+//        Log.d("TONY", "onNestedPreScroll remainingY = $remainingY")
         if (remainingX != 0 || remainingY != 0) {
             super.onNestedPreScroll(target, remainingX, remainingY, consumed)
         }
@@ -75,6 +80,7 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
         type: Int,
         consumed: IntArray
     ) {
+        Log.d("TONY", "onNestedScroll dyUnconsumed: $dyUnconsumed")
         dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, null, type)
         super.onNestedScroll(
             target,
@@ -91,6 +97,7 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
         target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int,
         dyUnconsumed: Int, type: Int
     ) {
+        Log.d("TONY", "onNestedScroll dyUnconsumed: $dyUnconsumed")
         super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type)
         dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, null, type)
     }
@@ -137,8 +144,10 @@ class NestedScrollingCoordinatorLayout : CoordinatorLayout, NestedScrollingChild
     override fun startNestedScroll(axes: Int): Boolean =
         helper.startNestedScroll(axes)
 
-    override fun stopNestedScroll(type: Int) =
+    override fun stopNestedScroll(type: Int) {
         helper.stopNestedScroll(type)
+    }
+
 
     override fun stopNestedScroll() {
         helper.stopNestedScroll()
