@@ -1,4 +1,4 @@
-package com.disney.recyclerviewupgradepoc
+package com.sample.recyclerviewupdate
 
 import org.junit.Test
 

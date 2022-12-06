@@ -1,10 +1,10 @@
-package com.disney.recyclerviewupgradepoc
+package com.sample.recyclerviewupdate
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.disney.recyclerviewupgradepoc.databinding.ActivityMainBinding
+import com.sample.recyclerviewupdate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

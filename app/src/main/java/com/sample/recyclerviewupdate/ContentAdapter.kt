@@ -1,6 +1,5 @@
-package com.disney.recyclerviewupgradepoc
+package com.sample.recyclerviewupdate
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height

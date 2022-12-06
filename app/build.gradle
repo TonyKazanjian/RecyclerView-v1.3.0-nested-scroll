@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.disney.recyclerviewupgradepoc'
+    namespace 'com.sample.recyclerviewupdate'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.disney.recyclerviewupgradepoc"
+        applicationId "com.sample.recyclerviewupdate"
         minSdk 21
         targetSdk 33
         versionCode 1
